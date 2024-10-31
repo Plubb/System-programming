@@ -1,8 +1,12 @@
-// 1)Create pthread_attr_t object: We declare pthread_attr_t attr;, creating an automatic variable to hold thread attributes.
-// 2)Initialize the attribute object: pthread_attr_init(&attr); initializes attr to default values (joinable by default).
-// 3)Modify the attribute values: We change attr to make the thread detached by calling pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);.
-// 4)Create the thread using the attribute object: We pass &attr to pthread_create so that the thread is created with the specified attributes.
-// 5)Destroy the attribute object: pthread_attr_destroy(&attr); releases resources held by the attribute object. The pthread_attr_t variable attr can still be reused if reinitialized with pthread_attr_init.
+// To specify customized thread attributes, you must follow these steps:
+// 1. Create a pthread_attr_t object. The easiest way is simply to declare an automatic
+// variable of this type.
+// 2. Call pthread_attr_init, passing a pointer to this object. This initializes the attributes
+// to their default values.
+// 3. Modify the attribute object to contain the desired attribute values.
+// 4. Pass a pointer to the attribute object when calling pthread_create.
+// 5. Call pthread_attr_destroy to release the attribute object. The pthread_attr_t variable
+// itself is not deallocated; it may be reinitialized with pthread_attr_init.
 
 #include <stdio.h>
 #include <pthread.h>
