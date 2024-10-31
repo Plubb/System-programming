@@ -1,0 +1,9 @@
+// -asynchronously cancelable-
+// allows a thread to be terminated immediately, without waiting for it to reach any specific point in its execution.
+pthread_cancel(thread); // Cancel the thread asynchronously
+
+// -synchronously cancelable-
+// A thread is typically cancelable at specific points where it’s safe to stop, such as when waiting for I/O operations, sleeping, or using specific library functions like read, write, sleep, etc.
+
+// -uncancelable-
+// By setting the thread’s cancelability state to PTHREAD_CANCEL_DISABLE, you make the thread immune to any cancellation requests while this state is active
