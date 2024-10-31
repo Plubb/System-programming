@@ -1,0 +1,15 @@
+Processes: Independent, isolated programs with their own memory. Suitable for applications needing separation.
+Example of a Process
+Imagine you are running a web browser (e.g., Chrome) and a text editor (e.g., Notepad) on your computer. Each application runs as a separate process.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Threads: Lightweight units of execution within a process that share memory and resources. Suitable for tasks requiring concurrency within the same application.
+Example of a Thread
+Now, consider a single application, such as a web server, that can handle multiple client requests simultaneously using threads.
+The web server process has multiple threads, each handling a different client request.
+Thread 1: Handles Request from Client A (e.g., serves a webpage).
+Thread 2: Handles Request from Client B (e.g., processes a form submission).
+Thread 3: Handles Request from Client C (e.g., serves an image).
+In this scenario:
+All threads share the same memory space (like session data, configuration settings).
+If one thread crashes while handling a request, it could potentially bring down the entire web server process, affecting all clients.
+
