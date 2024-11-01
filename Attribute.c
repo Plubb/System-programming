@@ -1,12 +1,12 @@
 // To specify customized thread attributes, you must follow these steps:
 // 1. Create a pthread_attr_t object. The easiest way is simply to declare an automatic
-// variable of this type.
+//     variable of this type.
 // 2. Call pthread_attr_init, passing a pointer to this object. This initializes the attributes
-// to their default values.
+//     to their default values.
 // 3. Modify the attribute object to contain the desired attribute values.
 // 4. Pass a pointer to the attribute object when calling pthread_create.
 // 5. Call pthread_attr_destroy to release the attribute object. The pthread_attr_t variable
-// itself is not deallocated; it may be reinitialized with pthread_attr_init.
+//     itself is not deallocated; it may be reinitialized with pthread_attr_init.
 
 #include <stdio.h>
 #include <pthread.h>
