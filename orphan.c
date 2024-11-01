@@ -12,10 +12,10 @@ int main(){
   int pid = fork();
 
   if(pid){
-    // sleep(3);
+    sleep(3);
     printf("This is Parent\n");
   } else{
-    // sleep(6);
+    sleep(6);
     while(1){
       printf("This is Child\n");
       sleep(1);
