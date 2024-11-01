@@ -1,39 +1,46 @@
 #include <stdio.h>
 #include <pthread.h>
-#include <unistd.h>
+#include <stdlib.h>
+
+// Structure to hold the character and count
+typedef struct {
+    char character;
+    int count;
+} thread_data_t;
 
 // Thread function
-void *print_word(void *arg) {
-    char **args = (char **)arg; // Convert to char pointer array
-    char *word = args[0];       // First argument: the word
-    int count = atoi(args[1]);   // Second argument: the count (converted to int)
-    
-    for (int i = 0; i < count; i++) {
-        printf("%s\n", word);
-        sleep(1); // Pause to see output clearly
+void* print_character(void* arg) {
+    thread_data_t* data = (thread_data_t*)arg; // Cast the argument to thread_data_t
+    for (int i = 0; i < data->count; i++) {
+        printf("%c", data->character); // Print the character
     }
-    return NULL;
+    return NULL; // Exit the thread
 }
 
 int main() {
-    // Define words and counts for each thread
-    char *args1[] = {"Hello", "3"};
-    char *args2[] = {"World", "5"};
-    char *args3[] = {"Threading", "4"};
+    pthread_t threads[3]; // Array to hold thread identifiers
+    thread_data_t thread_data[3]; // Array to hold thread data
 
-    // Thread variables
-    pthread_t thread1, thread2, thread3;
+    // Initialize data for each thread
+    thread_data[0].character = 'a';
+    thread_data[0].count = 999;
 
-    // Create threads with different arguments
-    pthread_create(&thread1, NULL, print_word, args1);
-    pthread_create(&thread2, NULL, print_word, args2);
-    pthread_create(&thread3, NULL, print_word, args3);
+    thread_data[1].character = 'b';
+    thread_data[1].count = 888;
 
-    // Wait for all threads to complete
-    pthread_join(thread1, NULL);
-    pthread_join(thread2, NULL);
-    pthread_join(thread3, NULL);
+    thread_data[2].character = 'c';
+    thread_data[2].count = 777;
 
-    printf("All threads finished.\n");
-    return 0;
+    // Create threads
+    pthread_create(&threads[0], NULL, print_character, (void*)&thread_data[0]);
+    pthread_create(&threads[1], NULL, print_character, (void*)&thread_data[1]);
+    pthread_create(&threads[2], NULL, print_character, (void*)&thread_data[2]);
+
+    // Wait for each thread to finish without using a loop
+    pthread_join(threads[0], NULL); // Wait for thread 1
+    pthread_join(threads[1], NULL); // Wait for thread 2
+    pthread_join(threads[2], NULL); // Wait for thread 3
+
+    printf("\n"); // Print newline after all characters are printed
+    return 0; // Exit program
 }
